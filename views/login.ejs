@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body>
+    <div class="login">
+        <div class="login-center">
+            <div class="login-content">
+                <h3 class="login-title">PINTEREST LOGIN</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" class="pinlogo">
+            </div>
+            <form action="/loggedin" method="post">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="basic-addon1">USERNAME</span>
+                    <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="basic-addon1">PASSWORD</span>
+                    <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="submit" class="btn btn-danger red">Submit</button>
+                    <a href="/" class="btn btn-primary blue">Sign Up</a>
+                </div>
+            </form>
+            <p class="terms">Creating an account means you’re okay with<br> Pinterest's Terms of Service, <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+</body>
+</html>
