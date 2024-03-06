@@ -14,6 +14,9 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" class="pinlogo">
             </div>
             <form action="/loggedin" method="post">
+                <% if( error.length > 0) { %>
+                    <h2 class="login-error"> <%= error %></h2>
+                <% } %>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="basic-addon1">USERNAME</span>
                     <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1">

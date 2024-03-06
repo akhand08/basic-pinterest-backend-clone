@@ -3,6 +3,7 @@ var router = express.Router();
 
 
 const userModel = require("./users");
+const postModel = require("./post");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 passport.use(new localStrategy(userModel.authenticate()));
@@ -16,8 +17,11 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get("/profile", isLoggedIn, function(req, res) {
-  res.render("profile");
+router.get("/profile", isLoggedIn, async function(req, res) {
+  let user = await userModel.findOne({username: req.session.passport.user})
+  .populate("posts")
+
+  res.render("profile", {user});
 })
 
 router.get("/login", function(req, res) {
@@ -78,13 +82,25 @@ function isLoggedIn(req, res, next) {
 
 //  upload
 
-router.post("/upload", isLoggedIn, upload.single('file'), function(req, res) {
+router.post("/upload", isLoggedIn, upload.single('file'), async function(req, res) {
   if(!req.file) {
     return res.status("400".send("No file were uploaded"));
   }
 
-  res.send("done")
+  let user = await userModel.findOne({username: req.session.passport.user});
 
+  let newPost = await postModel.create({
+    users: user._id,
+    postText: req.body.caption,
+    images: req.file.filename
+  })
+  
+  user["posts"].push(newPost._id);
+  await user.save();
+  
+  
+
+  res.redirect("/profile");
 
 })
 
