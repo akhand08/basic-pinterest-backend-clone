@@ -29,7 +29,6 @@ router.get("/login", function(req, res) {
   res.render("login", {error: req.flash("error")});
 })
 
-
 router.get("/feed", function(req, res) {
   res.render("feed");
 })
@@ -75,7 +74,6 @@ function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {
     return next();
   }
-
   res.redirect("/login");
 }
 
@@ -98,8 +96,6 @@ router.post("/upload", isLoggedIn, upload.single('file'), async function(req, re
   user["posts"].push(newPost._id);
   await user.save();
   
-  
-
   res.redirect("/profile");
 
 })
